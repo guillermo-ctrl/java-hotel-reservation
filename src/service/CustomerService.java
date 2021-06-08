@@ -2,6 +2,7 @@ package service;
 
 import model.Customer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,12 @@ public class CustomerService {
      }
 
     //Get all customers method
+    public static Collection<Customer> getAllCustomers(){
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
+        }
+        return customers;
+    }
 
     //Static reference
 }
