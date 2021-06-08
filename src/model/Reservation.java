@@ -11,7 +11,7 @@ public class Reservation {
 
     //constructor
 
-    public Reservation(Customer customer, Room room, Date i, Date i1) {
+    public Reservation(Customer customer, IRoom room, Date i, Date i1) {
         this.customer = customer;
         this.room = room;
         this.checkInDate = i;

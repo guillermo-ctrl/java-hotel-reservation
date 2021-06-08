@@ -31,7 +31,7 @@ public class CustomerService {
         for (Customer customer : customers) {
             System.out.println(customer.toString());
         }
-        return customers;
+        return null;
     }
 
     //Static reference

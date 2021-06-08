@@ -11,7 +11,7 @@ public class Tester {
         Date date2 = new Date(2001-07-05);
         Customer customer = new model.Customer("first", "second", "j@mail.com");
         FreeRoom freeRoom = new FreeRoom("2", 23, DOUBLE);
-        Room room = new Room("1", 23, SINGLE);
+        IRoom room = new Room("1", 23, SINGLE);
         Reservation reservation = new Reservation(customer, room,  date1, date2 );
         System.out.println(
                 customer.toString() +"\n"+ room.toString() +"\n"+ freeRoom.toString()+"\n"+ "Reservation: " +"\n"+ reservation.toString()
