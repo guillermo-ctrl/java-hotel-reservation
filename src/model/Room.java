@@ -7,12 +7,14 @@ public class Room implements model.IRoom {
     public double price;
     public model.RoomType enumeration;
 
+
     //Constructor function
     public Room (String roomNumber, double price, model.RoomType enumeration) {
         this.roomNumber = roomNumber;
         this.price = price;
         this.enumeration = enumeration;
     }
+
 
     //override toString for better description
     @Override
