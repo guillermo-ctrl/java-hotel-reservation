@@ -1,7 +1,7 @@
 package service;
 
 import model.Customer;
-import model.IRoom;
+
 import model.Room;
 import model.RoomType;
 
@@ -23,10 +23,10 @@ public class Tester {
         Date date4 = new Date(2002-07-05);
         Customer customer1 = CustomerService.getCustomer("t@gmail.com");
         Customer customer2 = CustomerService.getCustomer("j@gmail.com");
-        ReservationService.addRoom( new Room("1", 100, RoomType.SINGLE));
-        ReservationService.addRoom( new Room("2", 200, RoomType.SINGLE));
-        ReservationService.addRoom( new Room("3", 300, RoomType.DOUBLE));
-        ReservationService.addRoom( new Room("4", 400, RoomType.DOUBLE));
+        ReservationService.addRoom("1", 100.00, RoomType.SINGLE);
+        ReservationService.addRoom("2", 200.00, RoomType.SINGLE);
+        ReservationService.addRoom("3", 300.00, RoomType.DOUBLE);
+        ReservationService.addRoom("4", 400.00, RoomType.DOUBLE);
         //System.out.println("Roomlist after adding rooms"+"\n" +ReservationService.roomList.toString());
         //System.out.println(ReservationService.getARoom("2").toString());
         ReservationService.reserveARoom(customer1, ReservationService.getARoom("1"), date1, date2);

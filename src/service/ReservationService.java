@@ -10,11 +10,12 @@ public class ReservationService {
 
     //Arrays for rooms and reservations
 
-    static Collection<IRoom> roomList = new HashSet<>();
-    static Collection<Reservation> reservationList = new HashSet<>();
+    public static Collection<IRoom> roomList = new HashSet<>();
+    public static Collection<Reservation> reservationList = new HashSet<>();
 
     //Add room method
-    public static void addRoom(IRoom room){
+    public static void addRoom(String roomNumber,Double roomPrice,RoomType roomType){
+        Room room = new Room (roomNumber,roomPrice,roomType);
         roomList.add(room);
     }
 
