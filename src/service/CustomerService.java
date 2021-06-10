@@ -29,9 +29,9 @@ public class CustomerService {
     //Get all customers method
     public static Collection<Customer> getAllCustomers(){
         for (Customer customer : customers) {
-            System.out.println(customer.toString());
+
         }
-        return null;
+        return customers;
     }
 
     //Static reference
