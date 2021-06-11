@@ -5,6 +5,7 @@ import model.Customer;
 import model.Room;
 import model.RoomType;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Tester {
@@ -17,10 +18,10 @@ public class Tester {
         CustomerService.getAllCustomers();
          */
 
-        Date date1 = new Date(2001-07-04);
-        Date date2 = new Date(2001-07-05);
-        Date date3 = new Date(2002-07-04);
-        Date date4 = new Date(2002-07-05);
+        LocalDate date1 = LocalDate.of(2001,07,04);
+        LocalDate date2 = LocalDate.of(2001,07,05);
+        LocalDate date3 = LocalDate.of(2002,07,04);
+        LocalDate date4 = LocalDate.of(2002,07,05);
         Customer customer1 = CustomerService.getCustomer("t@gmail.com");
         Customer customer2 = CustomerService.getCustomer("j@gmail.com");
         ReservationService.addRoom("1", 100.00, RoomType.SINGLE);

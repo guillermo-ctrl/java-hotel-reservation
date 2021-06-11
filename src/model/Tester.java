@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static model.RoomType.DOUBLE;
@@ -7,8 +8,8 @@ import static model.RoomType.SINGLE;
 
 public class Tester {
     public static void main (String[]args) {
-        Date date1 = new Date(2001-07-04);
-        Date date2 = new Date(2001-07-05);
+        LocalDate date1 = LocalDate.of(2001,07,04);
+        LocalDate date2 = LocalDate.of(2001,07,05);
         Customer customer = new model.Customer("first", "second", "j@mail.com");
         FreeRoom freeRoom = new FreeRoom("2", 23, DOUBLE);
         IRoom room = new Room("1", 23, SINGLE);

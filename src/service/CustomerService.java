@@ -22,7 +22,6 @@ public class CustomerService {
     //Get single customer method
 
     public static Customer getCustomer(String customerEmail) {
-        //System.out.println(mapOfCustomers.get(customerEmail).toString());
         return mapOfCustomers.get(customerEmail);
      }
 
@@ -34,5 +33,4 @@ public class CustomerService {
         return customers;
     }
 
-    //Static reference
 }

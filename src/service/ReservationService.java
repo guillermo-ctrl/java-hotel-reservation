@@ -4,6 +4,7 @@ package service;
 
 import model.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class ReservationService {
@@ -29,14 +30,14 @@ public class ReservationService {
         }
 
     //Reserve a room method
-    public static Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
+    public static Reservation reserveARoom(Customer customer, IRoom room, LocalDate checkInDate, LocalDate checkOutDate) {
         reservationList.add(new Reservation(customer, room, checkInDate, checkOutDate));
 
         return null;
     }
 
     //Find a free room method
-    public static Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
+    public static Collection<IRoom> findRooms(LocalDate checkInDate, LocalDate checkOutDate) {
         Collection<IRoom> availableRooms = new HashSet<>();
 
         if (reservationList.size() == 0) {
@@ -52,8 +53,8 @@ public class ReservationService {
 
                     }
                     else if ((room.getRoomNumber().equals(reservation.room.getRoomNumber()))
-                            && ((checkInDate.before(reservation.checkInDate) && checkOutDate.before(reservation.checkInDate))
-                            || (checkInDate.after(reservation.checkOutDate) && checkOutDate.after(reservation.checkOutDate)))
+                            && ((checkInDate.isBefore(reservation.checkInDate) && checkOutDate.isBefore(reservation.checkInDate))
+                            || (checkInDate.isAfter(reservation.checkOutDate) && checkOutDate.isAfter(reservation.checkOutDate)))
                             ) {
                         availableRooms.add(room);
 

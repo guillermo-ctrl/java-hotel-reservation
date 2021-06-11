@@ -1,21 +1,22 @@
 package model;
 
-import java.util.Date;
+
+import java.time.LocalDate;
 
 public class Reservation {
     //variables
     public Customer customer;
     public IRoom room;
-    public Date checkInDate;
-    public Date checkOutDate;
+    public LocalDate checkInDate;
+    public LocalDate checkOutDate;
 
     //constructor
 
-    public Reservation(Customer customer, IRoom room, Date i, Date i1) {
+    public Reservation(Customer customer, IRoom room, LocalDate checkInDate, LocalDate checkOutDate) {
         this.customer = customer;
         this.room = room;
-        this.checkInDate = i;
-        this.checkOutDate = i1;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
     }
 
     //override toString method
