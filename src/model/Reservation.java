@@ -24,4 +24,6 @@ public class Reservation {
     public String toString() {
         return "Customer: " + customer + "\n" + "Room: " + room + "\n" + "Check in date: " + checkInDate + "\n" + "Check out date: " + checkOutDate;
     }
+
+
 }

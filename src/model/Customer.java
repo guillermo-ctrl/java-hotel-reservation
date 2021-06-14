@@ -1,11 +1,12 @@
 package model;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Customer {
     //variables
-    public String firstName;
-    public String lastName;
+    private String firstName;
+    private String lastName;
     public String eMail;
     private final String emailRegex = "^(.+)@(.+).com$";
     private final Pattern pattern = Pattern.compile(emailRegex);
@@ -23,6 +24,33 @@ public class Customer {
     @Override
     public String toString() {
         return "First name: " + firstName + "\n" + "Last name: " + lastName + "\n" + "Email: " + eMail;
+    }
+
+    //override equals method
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Customer)) {
+            return false;
+        }
+
+        Customer customer = (Customer) o;
+
+
+        return customer.firstName.equals(firstName) &&
+                customer.lastName.equals(lastName) &&
+                customer.eMail.equals(eMail);
+    }
+
+    //Idea from effective Java : Item 9
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + eMail.hashCode();
+        return result;
     }
 
 }

@@ -1,9 +1,8 @@
-package scanner;
+package UI;
 
 
 import api.AdminResource;
 import api.HotelResource;
-import model.IRoom;
 import model.RoomType;
 
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ public class MainMenu {
 
         try (java.util.Scanner scanner = new java.util.Scanner(System.in)) {
 
-            //Used scanner switch
+            //Used UI switch
             while (keepRunning) {
                 //FOR TESTING PURPOSES
                 AdminResource.addRoom ("1", 100.00, RoomType.SINGLE);

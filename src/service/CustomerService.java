@@ -14,7 +14,7 @@ public class CustomerService {
 
     //Add customer method
     public static void addCustomer(String firstName, String lastName, String email) {
-        customers.add(new model.Customer (firstName, lastName, email));
+        customers.add(new Customer (firstName, lastName, email));
         for (Customer customer : customers) {
             mapOfCustomers.put(customer.eMail, customer);
         }

@@ -1,10 +1,8 @@
-package scanner;
+package UI;
 
 import api.AdminResource;
 import api.HotelResource;
 import model.RoomType;
-
-import java.time.LocalDate;
 
 public class AdminMenu {
     //Method to check if an account exists
@@ -23,7 +21,7 @@ public class AdminMenu {
 
         try (java.util.Scanner scanner = new java.util.Scanner(System.in)) {
 
-            //Used scanner switch
+            //Used UI switch
             while (keepRunning) {
 
                 try {
