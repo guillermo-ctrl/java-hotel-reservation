@@ -14,6 +14,15 @@ public class ReservationService {
     public static Collection<IRoom> roomList = new HashSet<>();
     public static Collection<Reservation> reservationList = new HashSet<>();
 
+    //Static reference
+    private static ReservationService reservationService = new ReservationService();
+    public static ReservationService getReservationService() {
+        if (reservationService == null) {
+            reservationService = new ReservationService();
+        }
+        return reservationService;
+    }
+
     //Add room method
     public static void addRoom(String roomNumber,Double roomPrice,RoomType roomType){
         Room room = new Room (roomNumber,roomPrice,roomType);

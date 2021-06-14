@@ -3,39 +3,48 @@ package api;
 import model.Customer;
 import model.IRoom;
 import model.Reservation;
-import service.CustomerService;
-import service.ReservationService;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
+
+import static service.CustomerService.getCustomerService;
+import static service.ReservationService.getReservationService;
 
 public class HotelResource {
+    //Static reference
+    private static HotelResource hotelResource = new HotelResource();
+    public static HotelResource getHotelResource() {
+        if (hotelResource == null) {
+            hotelResource = new HotelResource();
+        }
+        return hotelResource;
+    }
+
     //Get a customer
     public static Customer getCustomer(String email){
-        return CustomerService.getCustomer(email);
+        return getCustomerService().getCustomer(email);
     }
 
     //Create new customer
     public static void createACustomer(String firstName, String lastName, String email) {
-        CustomerService.addCustomer(firstName, lastName, email);
+        getCustomerService().addCustomer(firstName, lastName, email);
     }
 
     //Get a room
     public static IRoom getRoom(String roomNumber) {
-        return ReservationService.getARoom(roomNumber);
+        return getReservationService().getARoom(roomNumber);
     }
 
     //Book a room
     public static void bookARoom(String customerEmail, IRoom room, LocalDate checkInDate, LocalDate checkOutDate) {
-        ReservationService.reserveARoom(CustomerService.getCustomer(customerEmail), room, checkInDate, checkOutDate);
+        getReservationService().reserveARoom(getCustomerService().getCustomer(customerEmail), room, checkInDate, checkOutDate);
     }
     //See all reservations of a specific customer
     public static Collection<Reservation> getCustomersReservations(String customerEmail) {
-        return ReservationService.getCustomersReservation(CustomerService.getCustomer(customerEmail));
+        return getReservationService().getCustomersReservation(getCustomerService().getCustomer(customerEmail));
     }
     //Find an available room for a specific date
     public static Collection<IRoom> findARoom(LocalDate checkIn, LocalDate checkOut) {
-        return ReservationService.findRooms(checkIn, checkOut);
+        return getReservationService().findRooms(checkIn, checkOut);
     }
 }
