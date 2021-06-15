@@ -9,6 +9,7 @@ import java.util.Collection;
 import static service.CustomerService.getCustomerService;
 import static service.ReservationService.getReservationService;
 
+
 public class AdminResource {
 
     //Static reference
@@ -21,7 +22,7 @@ public class AdminResource {
     }
 
     //Get a customer
-    public static Customer getCustomer(String email){
+    public Customer getCustomer(String email){
         return getCustomerService().getCustomer(email);
     }
 

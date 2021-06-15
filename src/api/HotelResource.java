@@ -21,7 +21,7 @@ public class HotelResource {
     }
 
     //Get a customer
-    public static Customer getCustomer(String email){
+    public Customer getCustomer(String email){
         return getCustomerService().getCustomer(email);
     }
 

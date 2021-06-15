@@ -1,13 +1,13 @@
 package UI;
-
-import api.AdminResource;
-import api.HotelResource;
 import model.RoomType;
+
+import static api.AdminResource.getAdminResource;
+import static api.HotelResource.getHotelResource;
 
 public class AdminMenu {
     //Method to check if an account exists
     private static boolean checkAccount() {
-        if (AdminResource.getAllCustomers().size() == 0) {
+        if (getAdminResource().getAllCustomers().size() == 0) {
             return false;
         }
         return true;
@@ -37,19 +37,19 @@ public class AdminMenu {
                             if (checkAccount() == false) {
                                 throw new Exception("There are no customers");
                             }
-                            System.out.println(AdminResource.getAllCustomers());
+                            System.out.println(getAdminResource().getAllCustomers());
                             break;
                         case 2:
-                            if (AdminResource.getAllRooms().size() == 0) {
+                            if (getAdminResource().getAllRooms().size() == 0) {
                                 throw new Exception("There are no rooms");
                             }
-                            System.out.println(AdminResource.getAllRooms());
+                            System.out.println(getAdminResource().getAllRooms());
                             break;
                         case 3:
-                            if (AdminResource.getAllReservations().size() == 0) {
+                            if (getAdminResource().getAllReservations().size() == 0) {
                                 throw new Exception("There are no reservations");
                             }
-                            System.out.println(AdminResource.getAllReservations());
+                            System.out.println(getAdminResource().getAllReservations());
                             break;
                         case 4:
                             System.out.println("Please, enter a room number");
@@ -65,8 +65,8 @@ public class AdminMenu {
                                     type = roomType;
                                 }
                             }
-                            AdminResource.addRoom(number, price, type);
-                            System.out.println("Room created: "+ HotelResource.getRoom(number));
+                            getAdminResource().addRoom(number, price, type);
+                            System.out.println("Room created: "+ getHotelResource().getRoom(number));
                             break;
                         case 5:
                             MainMenu.start();

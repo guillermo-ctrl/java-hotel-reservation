@@ -56,10 +56,8 @@ public class ReservationService {
         } else {
             for (Reservation reservation : reservationList) {
                 for (IRoom room : roomList) {
-                    //at this point all rooms are in the room list
                     if (!room.getRoomNumber().equals(reservation.room.getRoomNumber())) {
                         availableRooms.add(room);
-
                     }
                     else if ((room.getRoomNumber().equals(reservation.room.getRoomNumber()))
                             && ((checkInDate.isBefore(reservation.checkInDate) && checkOutDate.isBefore(reservation.checkInDate))
@@ -74,7 +72,7 @@ public class ReservationService {
                 }
             }
         }
-        System.out.println(availableRooms);
+        //System.out.println(availableRooms);
         return availableRooms;
     }
 
