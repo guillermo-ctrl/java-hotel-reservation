@@ -30,7 +30,6 @@ public class CustomerService {
     }
 
     //Get single customer method
-
     public static Customer getCustomer(String customerEmail) {
         return mapOfCustomers.get(customerEmail);
      }
@@ -41,6 +40,11 @@ public class CustomerService {
 
         }
         return customers;
+    }
+
+    //Get the email of a customer
+    public static String getCustomerEmail(Customer customer){
+        return customer.eMail;
     }
 
 }

@@ -22,7 +22,7 @@ public class Reservation {
     //override toString method
     @Override
     public String toString() {
-        return "Customer: " + customer + "\n" + "Room: " + room + "\n" + "Check in date: " + checkInDate + "\n" + "Check out date: " + checkOutDate;
+        return "Customer:" + "\n"   + customer + "\n" + "Room: " + "\n"   + room + "\n" + "Check in date: " + checkInDate + "\n" + "Check out date: " + checkOutDate + "\n";
     }
 
 

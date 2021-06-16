@@ -1,5 +1,6 @@
 package UI;
-import model.RoomType;
+import model.Customer;
+import model.IRoom;
 import java.time.LocalDate;
 import static api.AdminResource.getAdminResource;
 import static api.HotelResource.getHotelResource;
@@ -23,15 +24,16 @@ public class MainMenu {
 
             //Used UI switch
             while (keepRunning) {
-                //FOR TESTING PURPOSES
+
+                /*FOR TESTING PURPOSES
                 getAdminResource().addRoom ("1", 100.00, RoomType.SINGLE);
-                //getAdminResource().addRoom ("2", 200.00, RoomType.DOUBLE);
-                //getAdminResource().addRoom ("3", 300.00, RoomType.SINGLE);
-                //getAdminResource().addRoom ("4", 400.00, RoomType.DOUBLE);
+                getAdminResource().addRoom ("2", 200.00, RoomType.DOUBLE);
+                getAdminResource().addRoom ("3", 300.00, RoomType.SINGLE);
+                getAdminResource().addRoom ("4", 400.00, RoomType.DOUBLE);
                 getHotelResource().createACustomer("Jim", "Jimson", "jim@mail.com");
                 getHotelResource().createACustomer("Jon", "Jonson", "jon@mail.com");
                 getHotelResource().createACustomer("Jane", "Janeson", "jane@mail.com");
-                //FOR TESTING PURPOSES
+                FOR TESTING PURPOSES */
 
                 try {
                     System.out.println("Main menu");
@@ -46,6 +48,7 @@ public class MainMenu {
                             if (checkAccount() == false) {
                                 throw new Exception("need an account");
                             }
+
                             System.out.println("Enter the year of the check-in date");
                             int year = Integer.parseInt(scanner.nextLine());
                             System.out.println("Enter the month of the check-in date");
@@ -56,51 +59,96 @@ public class MainMenu {
                             int bookLength = Integer.parseInt(scanner.nextLine());
                             LocalDate checkInDate = LocalDate.of(year,month,day);
                             LocalDate checkOutDate = checkInDate.plusDays(bookLength);
+
                             if (getHotelResource().findARoom(checkInDate, checkOutDate).size() == 0 ) {
                                 if (getHotelResource().findARoom(checkInDate.plusDays(7), checkOutDate.plusDays(7)).size() == 0 ) {
                                     throw new Exception("There are no available rooms for that date");
                                 }
                                 System.out.println("There are no rooms for that date. Would you like to check rooms a week later?" + "\n"  + "Please answer YES or NO");
-                                String a = scanner.nextLine();
-                                System.out.println(a.toLowerCase());
-                                switch(a.toLowerCase()) {
-                                    case "yes":
-                                        checkInDate = checkInDate.plusDays(7);
-                                        checkOutDate = checkOutDate.plusDays(7);
-                                        break;
-                                    case "no":
-                                        throw new Exception("Ok then");
 
-                                    default:
-                                        throw new Exception("The answer had to be yes or no. Please try again.");
+                                Boolean answerSwitch = false;
+                                while (!answerSwitch) {
+                                    String a = scanner.nextLine();
+                                    switch(a.toLowerCase()) {
+                                        case "yes":
+                                            checkInDate = checkInDate.plusDays(7);
+                                            checkOutDate = checkOutDate.plusDays(7);
+                                            answerSwitch = true;
+                                            break;
+                                        case "no":
+                                            throw new Exception("Ok then");
+                                        default:
+                                            throw new Exception("The answer had to be yes or no. Please try again.");
+                                    }
                                 }
 
                             }
+
                             System.out.println("The following rooms are available from "+ checkInDate + " to " + checkOutDate);
-                            System.out.println(checkInDate);
                             System.out.println(getHotelResource().findARoom(checkInDate, checkOutDate));
-                            System.out.println("What room would you like to book? Please enter the room number");
-                            String bookRoomNumber = scanner.nextLine();
-                            System.out.println("Enter your e-mail address to book room number " + bookRoomNumber);
-                            String bookEmail = scanner.nextLine();
+
+                            boolean roomcheck = false;
+                            String bookRoomNumber = new String();
+                            while (!roomcheck) {
+                                System.out.println("What room would you like to book? Please enter the room number");
+                                bookRoomNumber = scanner.nextLine();
+                                for (IRoom room : getHotelResource().findARoom(checkInDate, checkOutDate))
+                                {
+                                    if (room.getRoomNumber().equals(bookRoomNumber)) {
+                                        roomcheck = true;
+                                    }
+                                    else {
+                                        System.out.println("You need to pick a room from the list.");
+                                    }
+                                }
+                            }
+
+                            boolean mailCheck = false;
+                            String bookEmail = new String();
+                            while (!mailCheck) {
+                                System.out.println("Enter your e-mail address to book room number " + bookRoomNumber);
+                                bookEmail = scanner.nextLine();
+                                for (Customer customer : getAdminResource().getAllCustomers())
+                                {
+                                    if (getAdminResource().getCustomerEmail(customer).equals(bookEmail)) {
+                                        mailCheck = true;
+                                    }
+                                }
+                                if (mailCheck == false) {
+                                    System.out.println("Email not valid, please try again.");
+                                }
+                            }
+
                             getHotelResource().bookARoom(bookEmail, getHotelResource().getRoom(bookRoomNumber), checkInDate, checkOutDate);
-                            System.out.println("You have successfully booked the following room(s)"+ "\n" + getHotelResource().getCustomersReservations(bookEmail));
+                            System.out.println("Reservation successful, press 2 to see your reservations.");
                             break;
                         case 2:
                             if (checkAccount() == false) {
                                 throw new Exception("You need to create an account");
                             }
+
                             System.out.println("Please, type in your e-mail address:");
                             String reservationMail = scanner.nextLine();
-                            getHotelResource().getCustomersReservations(reservationMail);
+
+                            for (Customer customer : getAdminResource().getAllCustomers()) {
+                                if (getAdminResource().getCustomerEmail(customer).equals(reservationMail)) {
+                                    if (getHotelResource().getCustomersReservations(reservationMail).size() == 0) {
+                                        System.out.println("You have no reservations. Press 1 to find and reserve a room.");
+                                        break;
+                                    }
+                                    System.out.println(getHotelResource().getCustomersReservations(reservationMail));
+                                    break;
+                                }
+                            }
+
                             break;
                         case 3:
                             System.out.println("Please, enter your first name");
-                            String firstName = new String(scanner.nextLine());
+                            String firstName = scanner.nextLine();
                             System.out.println("Please, enter your last name");
-                            String lastName = new String(scanner.nextLine());
+                            String lastName = scanner.nextLine();
                             System.out.println("Please, enter your e-mail address");
-                            String eMail = new String(scanner.nextLine());
+                            String eMail = scanner.nextLine();
                             getHotelResource().createACustomer(firstName, lastName, eMail);
                             break;
 
@@ -114,7 +162,7 @@ public class MainMenu {
                             keepRunning = false;
 
                         default:
-                            throw new Exception("choose a number between 1 and 5");
+                            throw new Exception("Choose a number between 1 and 5");
                     }
 
                 } catch (Exception ex) {

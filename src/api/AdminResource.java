@@ -4,6 +4,8 @@ import model.Customer;
 import model.IRoom;
 import model.Reservation;
 import model.RoomType;
+import service.CustomerService;
+
 import java.util.Collection;
 
 import static service.CustomerService.getCustomerService;
@@ -44,5 +46,10 @@ public class AdminResource {
     //See all reservations
     public static Collection <Reservation> getAllReservations(){
         return getReservationService().reservationList;
+    }
+
+    //Get the email of a customer
+    public static String getCustomerEmail(Customer customer){
+        return CustomerService.getCustomerEmail(customer);
     }
 }

@@ -7,6 +7,8 @@ import model.*;
 import java.time.LocalDate;
 import java.util.*;
 
+import static service.CustomerService.getCustomerService;
+
 public class ReservationService {
 
     //Arrays for rooms and reservations
@@ -77,13 +79,12 @@ public class ReservationService {
     }
 
     //Get customers reservation method
-    public static Collection <Reservation> getCustomersReservation(Customer customer) {
+    public static Collection <Reservation> getCustomersReservation(String CustomerEmail) {
         Collection<Reservation> customersReservation = new HashSet<>();
-        for (Reservation r: reservationList) {
-            if (r.customer == customer) {
-                System.out.println(r);
-                customersReservation.add(r);
-
+        Customer customer = getCustomerService().getCustomer(CustomerEmail);;
+        for (Reservation reservation: reservationList) {
+            if (reservation.customer.equals(customer)) {
+                customersReservation.add(reservation);
             }
         }
         return customersReservation;

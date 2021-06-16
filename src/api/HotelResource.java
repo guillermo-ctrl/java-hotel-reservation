@@ -41,7 +41,7 @@ public class HotelResource {
     }
     //See all reservations of a specific customer
     public static Collection<Reservation> getCustomersReservations(String customerEmail) {
-        return getReservationService().getCustomersReservation(getCustomerService().getCustomer(customerEmail));
+        return getReservationService().getCustomersReservation(customerEmail);
     }
     //Find an available room for a specific date
     public static Collection<IRoom> findARoom(LocalDate checkIn, LocalDate checkOut) {

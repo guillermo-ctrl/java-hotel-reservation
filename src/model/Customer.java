@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Customer {
@@ -23,7 +22,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "First name: " + firstName + "\n" + "Last name: " + lastName + "\n" + "Email: " + eMail;
+        return "First name: " + firstName + "\n" + "Last name: " + lastName + "\n" + "Email: " + eMail + "\n";
     }
 
     //override equals method
